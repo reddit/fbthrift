@@ -1,0 +1,52 @@
+Building this package
+=====================
+
+This package is maintained with git-buildpackage.
+
+Branches
+--------
+
+upstream
+    This is the upstream branch. Its HEAD should be the exact upstream source
+    to be built.
+
+ubuntu/trusty
+    This contains the actual packaging-ready version.
+
+patch-queue/ubuntu/trusty
+    This is a set of patches on top of upstream. It is for managing quilt
+    patches.
+
+How to build the package
+------------------------
+
+    git checkout ubuntu/trusty
+    gbp buildpackage --git-dist=trusty --git-debian-branch=ubuntu/trusty
+
+Add --git-pbuilder, -us -uc, etc. as necessary for your local workflow.
+
+
+How to update when upstream changes
+-----------------------------------
+
+1. Update `upstream` to the commit you want to build:
+
+    git checkout upstream
+    git merge some_commit_id
+
+2. Rebase the package branch off of upstream:
+
+    git checkout ubuntu/trusty
+    git rebase upstream
+
+2. Rebase the patch queue branch off of upstream, updating the
+   patches as necessary:
+
+    gbp-pq switch
+    git rebase upstream
+
+3. Refresh the quilt patches:
+
+    gbp-pq switch
+    gbp-pq export
+    git commit -a 'Refresh quilt patches'

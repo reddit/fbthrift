@@ -1,0 +1,25 @@
+fbthrift (0.31.0-0reddit4) trusty; urgency=medium
+
+  * Build python modules for all architectures while keeping the compiler on
+    amd64 only (because our build of folly is only on amd64).
+
+ -- Neil Williams <neil@reddit.com>  Sat, 21 Nov 2015 10:03:55 -0800
+
+fbthrift (0.31.0-0reddit3) trusty; urgency=medium
+
+  * Fix bytecode compilation on install of python-fbthrift.
+  * Add manpage for thrift1 binary.
+
+ -- Neil Williams <neil@reddit.com>  Tue, 03 Nov 2015 10:37:09 -0800
+
+fbthrift (0.31.0-0reddit2) trusty; urgency=medium
+
+  * Add event handler patch.
+
+ -- Neil Williams <neil@reddit.com>  Mon, 02 Nov 2015 16:21:17 -0800
+
+fbthrift (0.31.0-0reddit1) trusty; urgency=low
+
+  * Initial release.
+
+ -- Neil Williams <neil@reddit.com>  Wed, 28 Oct 2015 11:05:38 -0700

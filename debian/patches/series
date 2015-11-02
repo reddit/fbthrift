@@ -1,0 +1,4 @@
+0001-Build-only-the-compiler.patch
+0002-Python-Make-remotes-work-without-PAR.patch
+0003-Python-Make-remote-Python-3-compatible.patch
+0004-Add-event-for-handler-completion.patch

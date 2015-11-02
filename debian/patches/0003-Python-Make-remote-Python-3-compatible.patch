@@ -1,0 +1,44 @@
+From: Neil Williams <neil@reddit.com>
+Date: Wed, 28 Oct 2015 00:08:06 -0700
+Subject: Python: Make remote Python 3 compatible.
+
+These modules didn't import/run properly on Py3.
+---
+ thrift/lib/py/util/randomizer.py | 2 +-
+ thrift/lib/py/util/remote.py     | 3 +--
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/thrift/lib/py/util/randomizer.py b/thrift/lib/py/util/randomizer.py
+index 16dd1cd..02f1afc 100644
+--- a/thrift/lib/py/util/randomizer.py
++++ b/thrift/lib/py/util/randomizer.py
+@@ -387,7 +387,7 @@ def _integer_randomizer_factory(name, ttype, n_bits):
+             else:
+                 raise TypeError("Invalid %s seed: %s" % (_name, seed))
+ 
+-    NBitIntegerRandomizer.__name__ = six.binary_type("%sRandomizer" % _name)
++    NBitIntegerRandomizer.__name__ = "%sRandomizer" % _name
+ 
+     return NBitIntegerRandomizer
+ 
+diff --git a/thrift/lib/py/util/remote.py b/thrift/lib/py/util/remote.py
+index 6296523..d249d62 100644
+--- a/thrift/lib/py/util/remote.py
++++ b/thrift/lib/py/util/remote.py
+@@ -23,7 +23,6 @@ from __future__ import division
+ from __future__ import print_function
+ from __future__ import unicode_literals
+ 
+-import itertools
+ import os
+ import pprint
+ from six.moves.urllib.parse import urlparse
+@@ -113,7 +112,7 @@ class RemoteClient(object):
+             thrift_types[key] = getattr(self.ttypes, key)
+ 
+         fn_args = []
+-        for arg, arg_info in itertools.izip(args, fn.args):
++        for arg, arg_info in zip(args, fn.args):
+             if arg_info[2] == 'string':
+                 # For ease-of-use, we don't eval string arguments, simply so
+                 # users don't have to wrap the arguments in quotes

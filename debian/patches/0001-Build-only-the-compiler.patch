@@ -1,0 +1,87 @@
+From: Neil Williams <neil@reddit.com>
+Date: Mon, 2 Nov 2015 13:41:47 -0800
+Subject: Build only the compiler
+
+Since we don't need the cpp2 library for our purposes, we can skip
+building it and drop a bunch of dependencies.
+---
+ thrift/Makefile.am          |  2 +-
+ thrift/compiler/Makefile.am |  2 +-
+ thrift/configure.ac         | 31 -------------------------------
+ 3 files changed, 2 insertions(+), 33 deletions(-)
+
+diff --git a/thrift/Makefile.am b/thrift/Makefile.am
+index f405ac3..1a69966 100644
+--- a/thrift/Makefile.am
++++ b/thrift/Makefile.am
+@@ -19,7 +19,7 @@
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = compiler lib
++SUBDIRS = compiler
+ 
+ 
+ dist-hook:
+diff --git a/thrift/compiler/Makefile.am b/thrift/compiler/Makefile.am
+index 7b9d5e0..6fbd147 100644
+--- a/thrift/compiler/Makefile.am
++++ b/thrift/compiler/Makefile.am
+@@ -25,7 +25,7 @@ AM_YFLAGS = -d
+ LIBS =
+ BUILT_SOURCES =
+ 
+-SUBDIRS = . py
++SUBDIRS = .
+ 
+ bin_PROGRAMS = thrift1
+ 
+diff --git a/thrift/configure.ac b/thrift/configure.ac
+index 6847d1d..29566f0 100644
+--- a/thrift/configure.ac
++++ b/thrift/configure.ac
+@@ -145,14 +145,6 @@ have_cpp=yes
+ if test "$with_cpp" = "yes";  then
+   AC_CHECK_LIB([glog],[openlog],[],[AC_MSG_ERROR(
+              [Please install google-glog library])])
+-  AC_CHECK_LIB([gflags],[getenv],[],[AC_MSG_ERROR(
+-             [Please install google-gflags library])])
+-  AC_CHECK_LIB([snappy], [main], [], [AC_MSG_ERROR(
+-             [Please install snappy library])])
+-  AC_CHECK_LIB([numa], [numa_available], [], [AC_MSG_ERROR(
+-             [Please install numa library])])
+-  AC_CHECK_LIB([wangle], [getenv], [], [AC_MSG_ERROR(
+-             [Please install the wangle library from https://github.com/facebook/wangle])])
+ 
+   AX_BOOST_BASE([1.40.0])
+   if test "x$succeeded" != "xyes" ; then
+@@ -178,29 +170,6 @@ if test "$with_cpp" = "yes";  then
+        have_cpp="no" ;;
+   esac
+ 
+-  AX_LIB_EVENT([1.0])
+-  have_libevent=$success
+-  if test x"$success" != x"yes"; then
+-    AC_MSG_ERROR([Please install libevent])
+-  fi
+-
+-  AC_CHECK_HEADER([gssapi/gssapi_generic.h], [], [
+-    AC_MSG_ERROR([Please install libkrb5-dev])
+-  ], [])
+-
+-
+-  AC_CHECK_LIB(sasl2, sasl_client_new, [], [
+-    AC_MSG_ERROR([Please install libsasl2])
+-  ], [])
+-
+-  AC_CHECK_HEADER([snappy.h], [], [
+-    AC_MSG_ERROR([Please install libsnappy-dev])
+-  ], [])
+-
+-  AC_CHECK_HEADER([numa.h], [], [
+-    AC_MSG_ERROR([Please install libnuma-dev])
+-  ], [])
+-
+   AX_LIB_ZLIB([1.2.3])
+   have_zlib=$success
+ fi

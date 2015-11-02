@@ -1,0 +1,54 @@
+.TH THRIFT1 "1" "November 2015" "thrift1 31" "User Commands"
+.SH NAME
+thrift1 \- code generator/compiler for Thrift IDL
+.SH SYNOPSIS
+.B thrift
+[\fIoptions\fR] \fIfile\fR
+.SH DESCRIPTION
+Thrift is a framework for efficient serialization and RPC services.  The
+.B thrift1
+compiler accepts a source file containing definitions of Thrift structs and services,
+and generates the language-specific code to implement them.
+.SH OPTIONS
+.TP
+\fB\-o\fR dir
+Set the output directory for gen\-* packages (default: current directory)
+.TP
+\fB\-out\fR dir
+Set the output location for generated files (no gen\-* folder will be created)
+.TP
+\fB\-I\fR dir
+Add a directory to the list of directories searched for include directives
+.TP
+\fB\-nowarn\fR
+Suppress all compiler warnings (BAD!)
+.TP
+\fB\-strict\fR
+Strict compiler warnings on
+.TP
+\fB\-v[erbose]\fR
+Verbose mode
+.TP
+\fB\-r[ecurse]\fR
+Also generate included files
+.TP
+\fB\-debug\fR
+Parse debug trace to stdout
+.TP
+\fB\-\-allow\-neg\-keys\fR
+Allow negative field keys (Used to preserve protocol compatibility with older .thrift files)
+.HP
+\fB\-\-allow\-neg\-enum\-vals\fR Allow negative enum vals
+.TP
+\fB\-\-allow\-64bit\-consts\fR
+Do not print warnings about using 64\-bit constants
+.TP
+\fB\-\-gen\fR STR
+Generate code with a dynamically\-registered generator.  STR has the form
+language[:key1=val1[,key2,[key3=val3]]].  Keys and values are options passed to
+the generator.  Many options will not require values.  Run
+.B thrift1
+without arguments to see all the languages and their options.
+.HP
+\fB\-\-record\-genfiles\fR FILE
+Save the list of generated files to FILE

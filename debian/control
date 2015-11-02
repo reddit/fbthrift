@@ -1,0 +1,53 @@
+Source: fbthrift
+Maintainer: Neil Williams <neil@reddit.com>
+Section: devel
+Priority: extra
+Standards-Version: 3.9.5
+X-Python-Version: 2.7
+X-Python3-Version: 3.4
+Build-Depends: debhelper (>= 9),
+ dh-autoreconf, libfolly-dev [amd64], libgoogle-glog-dev [amd64], libssl-dev [amd64], libboost-all-dev [amd64], libdouble-conversion-dev [amd64], flex [amd64], bison [amd64],
+ dh-python, python-dev, python3-dev
+
+Package: fbthrift-compiler
+Section: devel
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: code generator/compiler for Thrift definitions
+ Thrift is a software framework for the development of reliable and
+ performant communication and data serialization.  It combines a software
+ stack with code generation to build services that operate seamlessly
+ across a number of different development languages.
+ .
+ This package contains the compiler used to generate language code from
+ Thrift definition files.
+
+Package: python-fbthrift
+Provides: python-thrift
+Conflicts: python-thrift
+Replaces: python-thrift
+Section: python
+Architecture: any
+Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Description: Python library for Thrift
+ Thrift is a software framework for the development of reliable and
+ performant communication and data serialization. It combines a software
+ stack with a code generation to build services that operate seamlessly
+ across a number of different development languages.
+ .
+ This package provides the Python bindings for Thrift.
+
+Package: python3-fbthrift
+Provides: python3-thrift
+Conflicts: python3-thrift
+Replaces: python3-thrift
+Section: python
+Architecture: any
+Depends: ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Description: Python library for Thrift
+ Thrift is a software framework for the development of reliable and
+ performant communication and data serialization. It combines a software
+ stack with a code generation to build services that operate seamlessly
+ across a number of different development languages.
+ .
+ This package provides the Python 3 bindings for Thrift.

@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE=1
+export PYLIB_DIR=thrift/lib/py
+
+DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+
+%:
+	dh $@ --with=autoreconf,python2,python3 --sourcedirectory=thrift/ --parallel
+
+
+override_dh_autoreconf:
+ifeq ($(DEB_HOST_ARCH),amd64)
+	dh_autoreconf -O--sourcedirectory=thrift/ -O--parallel
+endif
+
+
+override_dh_auto_clean:
+ifeq ($(DEB_HOST_ARCH),amd64)
+	dh_auto_clean -O--sourcedirectory=thrift/ -O--parallel
+endif
+	cd $(PYLIB_DIR) && python2.7 setup.py clean
+	cd $(PYLIB_DIR) && python3 setup.py clean
+
+
+override_dh_auto_build:
+ifeq ($(DEB_HOST_ARCH),amd64)
+	dh_auto_build -O--sourcedirectory=thrift/ -O--parallel
+endif
+	cd $(PYLIB_DIR) && python2.7 setup.py build
+	cd $(PYLIB_DIR) && python3 setup.py build
+
+
+override_dh_auto_install:
+ifeq ($(DEB_HOST_ARCH),amd64)
+	dh_auto_install -O--sourcedirectory=thrift/ -O--parallel
+endif
+	cd $(PYLIB_DIR) && python2.7 setup.py install --force --root=$(CURDIR)/debian/tmp --no-compile --install-layout=deb
+	# these files don't compile to bytecode on 2.7 because they use python3-isms ("yield from")
+	rm $(CURDIR)/debian/tmp/usr/lib/python2.7/dist-packages/thrift/server/TAsyncioServer.py $(CURDIR)/debian/tmp/usr/lib/python2.7/dist-packages/thrift/util/asyncio.py
+	cd $(PYLIB_DIR) && python3 setup.py install --force --root=$(CURDIR)/debian/tmp --no-compile --install-layout=deb
