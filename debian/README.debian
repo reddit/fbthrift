@@ -21,7 +21,7 @@ How to build the package
 ------------------------
 
     git checkout ubuntu/trusty
-    gbp buildpackage --git-dist=trusty --git-debian-branch=ubuntu/trusty
+    gbp buildpackage --git-dist=trusty --git-debian-branch=ubuntu/trusty --git-upstream-tree=branch
 
 Add --git-pbuilder, -us -uc, etc. as necessary for your local workflow.
 
@@ -42,11 +42,11 @@ How to update when upstream changes
 2. Rebase the patch queue branch off of upstream, updating the
    patches as necessary:
 
-    gbp-pq switch
+    gbp pq switch
     git rebase upstream
 
 3. Refresh the quilt patches:
 
-    gbp-pq switch
-    gbp-pq export
+    gbp pq switch
+    gbp pq export
     git commit -a 'Refresh quilt patches'
