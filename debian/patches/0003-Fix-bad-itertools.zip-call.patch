@@ -1,26 +1,13 @@
 From: Neil Williams <neil@reddit.com>
 Date: Wed, 28 Oct 2015 00:08:06 -0700
-Subject: Python: Make remote Python 3 compatible.
+Subject: Fix bad itertools.zip call
 
-These modules didn't import/run properly on Py3.
+itertools.zip does not exist. We'll just stomach the slight inefficency
+in Python 2 since it really doesn't matter.
 ---
- thrift/lib/py/util/randomizer.py | 2 +-
- thrift/lib/py/util/remote.py     | 3 +--
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ thrift/lib/py/util/remote.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/thrift/lib/py/util/randomizer.py b/thrift/lib/py/util/randomizer.py
-index 16dd1cd..02f1afc 100644
---- a/thrift/lib/py/util/randomizer.py
-+++ b/thrift/lib/py/util/randomizer.py
-@@ -387,7 +387,7 @@ def _integer_randomizer_factory(name, ttype, n_bits):
-             else:
-                 raise TypeError("Invalid %s seed: %s" % (_name, seed))
- 
--    NBitIntegerRandomizer.__name__ = six.binary_type("%sRandomizer" % _name)
-+    NBitIntegerRandomizer.__name__ = "%sRandomizer" % _name
- 
-     return NBitIntegerRandomizer
- 
 diff --git a/thrift/lib/py/util/remote.py b/thrift/lib/py/util/remote.py
 index 6296523..d249d62 100644
 --- a/thrift/lib/py/util/remote.py

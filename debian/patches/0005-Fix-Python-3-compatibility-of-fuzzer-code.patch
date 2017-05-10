@@ -1,0 +1,25 @@
+From: Neil Williams <neil@reddit.com>
+Date: Tue, 9 May 2017 23:35:39 -0700
+Subject: Fix Python 3 compatibility of fuzzer code
+
+For __name__, Python 2 wants str and Python 3 wants unicode. Fun.
+---
+ thrift/lib/py/util/randomizer.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/thrift/lib/py/util/randomizer.py b/thrift/lib/py/util/randomizer.py
+index 16dd1cd..cd10671 100644
+--- a/thrift/lib/py/util/randomizer.py
++++ b/thrift/lib/py/util/randomizer.py
+@@ -387,7 +387,10 @@ def _integer_randomizer_factory(name, ttype, n_bits):
+             else:
+                 raise TypeError("Invalid %s seed: %s" % (_name, seed))
+ 
+-    NBitIntegerRandomizer.__name__ = six.binary_type("%sRandomizer" % _name)
++    if six.PY2:
++        NBitIntegerRandomizer.__name__ = str("%sRandomizer" % _name)
++    else:
++        NBitIntegerRandomizer.__name__ = "%sRandomizer" % _name
+ 
+     return NBitIntegerRandomizer
+ 
