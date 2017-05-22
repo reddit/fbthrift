@@ -28,7 +28,7 @@ Conflicts: python-thrift
 Replaces: python-thrift
 Section: python
 Architecture: any
-Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Depends: python-six, ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Description: Python library for Thrift
  Thrift is a software framework for the development of reliable and
  performant communication and data serialization. It combines a software
@@ -43,7 +43,7 @@ Conflicts: python3-thrift
 Replaces: python3-thrift
 Section: python
 Architecture: any
-Depends: ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Depends: python3-six, ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Description: Python library for Thrift
  Thrift is a software framework for the development of reliable and
  performant communication and data serialization. It combines a software
