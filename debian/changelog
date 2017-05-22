@@ -1,3 +1,9 @@
+fbthrift (0.31.0-0reddit5) trusty; urgency=medium
+
+  * Record dependency on python[3]-six in python packages.
+
+ -- Neil Williams <neil@reddit.com>  Sat, 21 Nov 2015 12:27:03 -0800
+
 fbthrift (0.31.0-0reddit4) trusty; urgency=medium
 
   * Build python modules for all architectures while keeping the compiler on
