@@ -1,0 +1,21 @@
+From: Krishnan Chandra <krishnan.chandra@reddit.com>
+Date: Thu, 31 Aug 2017 18:30:10 -0700
+Subject: Reset context when exiting out of one
+
+---
+ thrift/lib/py/protocol/TJSONProtocol.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/thrift/lib/py/protocol/TJSONProtocol.py b/thrift/lib/py/protocol/TJSONProtocol.py
+index 7695128..5850177 100644
+--- a/thrift/lib/py/protocol/TJSONProtocol.py
++++ b/thrift/lib/py/protocol/TJSONProtocol.py
+@@ -161,6 +161,8 @@ class TJSONProtocolBase(TProtocolBase):
+ 
+     def popContext(self):
+         self.contextStack.pop()
++        if self.contextStack:
++            self.context = self.contextStack[-1]
+ 
+     def writeJSONString(self, string):
+         # Python 3 JSON will not serialize bytes

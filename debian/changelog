@@ -1,3 +1,9 @@
+fbthrift (0.31.0-0reddit7) trusty; urgency=medium
+
+  * Fix TJSONProtocol context issues
+
+ -- Neil Williams <neil@reddit.com>  Fri, 01 Sep 2017 14:00:43 -0700
+
 fbthrift (0.31.0-0reddit6) trusty; urgency=medium
 
   * Fix error when trying to run generated remote from python 2.

@@ -3,3 +3,4 @@
 0003-Fix-bad-itertools.zip-call.patch
 0004-Add-event-for-handler-completion.patch
 0005-Fix-Python-3-compatibility-of-fuzzer-code.patch
+0006-Reset-context-when-exiting-out-of-one.patch
