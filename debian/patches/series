@@ -4,3 +4,4 @@
 0004-Add-event-for-handler-completion.patch
 0005-Fix-Python-3-compatibility-of-fuzzer-code.patch
 0006-Reset-context-when-exiting-out-of-one.patch
+0007-Parse-unicode-characters-in-TJSONProtocol.patch

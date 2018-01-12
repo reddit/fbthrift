@@ -1,3 +1,9 @@
+fbthrift (0.31.0-0reddit8) trusty; urgency=medium
+
+  * Fix TJSONProtocol unicode issues
+
+ -- Krishnan Chandra <krishnan.chandra@reddit.com>  Fri, 12 Jan 2018 18:41:24 +0000
+
 fbthrift (0.31.0-0reddit7) trusty; urgency=medium
 
   * Fix TJSONProtocol context issues
