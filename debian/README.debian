@@ -1,3 +1,16 @@
+Setting up your build environment
+=================================
+
+To build FBThrift, you'll need to have an Ubuntu VM or machine set up,
+and you will need to have the Reddit PPA installed:
+
+add-apt-repository -y ppa:reddit/ppa && apt-get update
+
+You'll also need to install the following packages:
+
+apt-get install -y git-buildpackage build-essential devscripts
+
+
 Building this package
 =====================
 
@@ -21,9 +34,7 @@ How to build the package
 ------------------------
 
     git checkout ubuntu/trusty
-    gbp buildpackage --git-dist=trusty --git-debian-branch=ubuntu/trusty --git-upstream-tree=branch
-
-Add --git-pbuilder, -us -uc, etc. as necessary for your local workflow.
+    gbp buildpackage --git-dist=trusty --git-debian-branch=ubuntu/trusty --git-upstream-tree=branch -S -sa
 
 
 How to update when upstream changes
